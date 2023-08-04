@@ -701,17 +701,17 @@ func initBounceManager(app *App) *bounce.Manager {
 
 func initAbout(q *models.Queries, db *sqlx.DB) about {
 	var (
-		mem     runtime.MemStats
-		utsname syscall.Utsname
+		mem runtime.MemStats
+		// utsname syscall.Utsname
 	)
 
 	// Memory / alloc stats.
 	runtime.ReadMemStats(&mem)
 
 	// OS info.
-	if err := syscall.Uname(&utsname); err != nil {
-		lo.Printf("WARNING: error getting system info: %v", err)
-	}
+	// if err := syscall.Uname(&utsname); err != nil {
+	// 	lo.Printf("WARNING: error getting system info: %v", err)
+	// }
 
 	// DB dbv.
 	info := types.JSONText(`{}`)
@@ -729,10 +729,10 @@ func initAbout(q *models.Queries, db *sqlx.DB) about {
 			NumCPU: runtime.NumCPU(),
 		},
 		Host: aboutHost{
-			OS:        int8ToStr(utsname.Sysname[:]),
-			OSRelease: int8ToStr(utsname.Release[:]),
-			Machine:   int8ToStr(utsname.Machine[:]),
-			Hostname:  int8ToStr(utsname.Nodename[:]),
+			// OS:        int8ToStr(utsname.Sysname[:]),
+			// OSRelease: int8ToStr(utsname.Release[:]),
+			// Machine:   int8ToStr(utsname.Machine[:]),
+			// Hostname:  int8ToStr(utsname.Nodename[:]),
 		},
 	}
 
